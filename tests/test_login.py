@@ -22,3 +22,7 @@ def test_add_product_to_cart(driver):
     inventory_page.add_backpack_to_cart()
 
     assert inventory_page.cart_count() == "1"
+
+def test_application_title(driver):
+    driver.get("https://www.saucedemo.com/")
+    assert driver.title == "Swag Labs"
