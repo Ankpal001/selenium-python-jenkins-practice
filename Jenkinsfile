@@ -12,6 +12,7 @@ pipeline {
     stages {
         stage('Test') {
             steps {
+                bat 'echo TEST_ENV=%TEST_ENV%'
                 bat 'pytest'
             }
         }
