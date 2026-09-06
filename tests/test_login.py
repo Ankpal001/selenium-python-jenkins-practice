@@ -1,9 +1,10 @@
-from config.config import BASE_URL, STANDARD_USER, STANDARD_PASSWORD
+from config.config import BASE_URL, STANDARD_USER, STANDARD_PASSWORD, TEST_ENV
 from pages.login_page import LoginPage
 from pages.inventory_page import InventoryPage
 
 
 def test_valid_login(driver):
+    print(f"Running tests in environment: {TEST_ENV}")
     login_page = LoginPage(driver)
     login_page.open(BASE_URL)
     login_page.login(STANDARD_USER, STANDARD_PASSWORD)
