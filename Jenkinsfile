@@ -1,5 +1,9 @@
 pipeline{
  agent any
+ parameters{choice(name: 'TEST_ENV',
+                   choices : ['qa', 'staging', 'prod'],
+                   description: 'Select the test environment'
+                   )}
  stages{
         stage('Test'){steps{bat 'pytest'}}}
  post{
@@ -14,4 +18,3 @@ pipeline{
     }
 }
 
- }
