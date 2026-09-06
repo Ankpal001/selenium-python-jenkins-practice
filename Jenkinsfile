@@ -9,10 +9,15 @@ pipeline {
         )
     }
 
+    environment {
+        BROWSER = 'chrome'
+    }
+
     stages {
         stage('Test') {
             steps {
                 bat 'echo TEST_ENV=%TEST_ENV%'
+                bat 'echo BROWSER=%BROWSER%'
                 bat 'pytest'
             }
         }
