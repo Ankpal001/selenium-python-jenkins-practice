@@ -2,16 +2,17 @@ pipeline {
     agent any
 
     parameters {
-        choice(
-            name: 'TEST_ENV',
-            choices: ['qa', 'staging', 'prod'],
-            description: 'Select the test environment'
-        )
-    }
-
-    environment {
-        BROWSER = 'chrome'
-    }
+     choice(
+        name: 'TEST_ENV',
+        choices: ['qa', 'staging', 'prod'],
+        description: 'Select the test environment'
+    )
+    choice(
+        name: 'BROWSER',
+        choices: ['chrome', 'firefox'],
+        description: 'Select the browser'
+    )
+}
 
     stages {
         stage('Test') {
