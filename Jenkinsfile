@@ -20,11 +20,16 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                bat 'echo APPLICATION=%APPLICATION%'
-                bat 'echo TEST_ENV=%TEST_ENV%'
-                bat 'echo BROWSER=%BROWSER%'
-                bat 'pytest'
-            }
+    bat 'echo APPLICATION=%APPLICATION%'
+    bat 'echo TEST_ENV=%TEST_ENV%'
+    bat 'echo BROWSER=%BROWSER%'
+
+    withEnv(['APPLICATION=temporary-app']) {
+        bat 'echo APPLICATION=%APPLICATION%'
+    }
+
+    bat 'pytest'
+}
         }
     }
 
