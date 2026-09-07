@@ -15,10 +15,15 @@ def create_driver():
         options.add_argument("--no-sandbox")
         return webdriver.Chrome(options=options)
 
-    elif browser == "firefox":
-        options = FirefoxOptions()
-        options.add_argument("--headless")
-        return webdriver.Firefox(options=options)
 
+    elif browser == "firefox":
+
+        options = FirefoxOptions()
+
+        options.binary_location = r"C:\Program Files\Mozilla Firefox\firefox.exe"
+
+        options.add_argument("--headless")
+
+        return webdriver.Firefox(options=options)
     else:
         raise ValueError(f"Unsupported browser: {browser}")
