@@ -31,3 +31,5 @@ For the first Jenkins exercise, you can also copy the Jenkinsfile contents into
 a Pipeline job using "Pipeline script from SCM" after pushing this project to GitHub.
 
 SCM Polling test - Jenkins automatically detects GitHub changes.
+
+Webhook test
