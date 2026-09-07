@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+    APPLICATION = 'selenium-python'
+      }
 
     parameters {
      choice(
@@ -17,6 +20,7 @@ pipeline {
     stages {
         stage('Test') {
             steps {
+                bat 'echo APPLICATION=%APPLICATION%'
                 bat 'echo TEST_ENV=%TEST_ENV%'
                 bat 'echo BROWSER=%BROWSER%'
                 bat 'pytest'
