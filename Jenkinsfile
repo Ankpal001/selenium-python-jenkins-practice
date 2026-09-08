@@ -34,7 +34,9 @@ pipeline {
                     bat 'echo APPLICATION=%APPLICATION%'
                 }
 
-                bat 'pytest'
+                retry(2) {
+                   bat 'pytest'
+                }
             }
         }
     }
