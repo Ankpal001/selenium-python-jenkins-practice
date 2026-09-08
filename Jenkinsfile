@@ -36,28 +36,20 @@ pipeline {
     }
 
 post {
-    always {
-        publishHTML([
-            allowMissing: false,
-            reportDir: 'reports',
-            reportFiles: 'pytest-report.html',
-            reportName: 'Pytest HTML Report',
-            keepAll: true,
-            alwaysLinkToLastBuild: true
-        ])
+  always {
+    publishHTML([
+        allowMissing: false,
+        reportDir: 'reports',
+        reportFiles: 'pytest-report.html',
+        reportName: 'Pytest HTML Report',
+        keepAll: true,
+        alwaysLinkToLastBuild: true
+    ])
 
-        archiveArtifacts(
-            artifacts: 'reports/*.html',
-            allowEmptyArchive: false
-        )
-    }
-
-    success {
-        echo 'Automation execution PASSED'
-    }
-
-    failure {
-        echo 'Automation execution FAILED'
-    }
+    archiveArtifacts(
+        artifacts: 'reports/*.html,screenshots/*.png',
+        allowEmptyArchive: false
+    )
 }
+
 }
