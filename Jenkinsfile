@@ -20,22 +20,20 @@ pipeline {
     }
 
     stages {
-        stage('Test') {
-            options {
-                timeout(time: 10, unit: 'MINUTES')
-            }
 
-            steps {
-                bat 'echo APPLICATION=%APPLICATION%'
-                bat 'echo TEST_ENV=%TEST_ENV%'
-                bat 'echo BROWSER=%BROWSER%'
+        stage('Parallel Tests') {
+            parallel {
 
-                withEnv(['APPLICATION=temporary-app']) {
-                    bat 'echo APPLICATION=%APPLICATION%'
+                stage('Login Tests') {
+                    steps {
+                        bat 'pytest tests/test_login.py'
+                    }
                 }
 
-                retry(2) {
-                   bat 'pytest'
+                stage('Negative Tests') {
+                    steps {
+                        bat 'pytest tests/test_negative_login.py'
+                    }
                 }
             }
         }
