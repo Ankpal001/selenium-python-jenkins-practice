@@ -21,6 +21,10 @@ pipeline {
 
     stages {
         stage('Test') {
+            options {
+                timeout(time: 10, unit: 'MINUTES')
+            }
+
             steps {
                 bat 'echo APPLICATION=%APPLICATION%'
                 bat 'echo TEST_ENV=%TEST_ENV%'
