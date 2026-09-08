@@ -26,4 +26,4 @@ def test_add_product_to_cart(driver):
 
 def test_application_title(driver):
     driver.get("https://www.saucedemo.com/")
-    assert driver.title == "Swag Labs"
+    assert driver.title == "WRONG TITLE"
