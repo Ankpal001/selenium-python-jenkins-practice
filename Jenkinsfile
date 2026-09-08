@@ -34,14 +34,15 @@ pipeline {
     }
 
     post {
-        always {
-            publishHTML([
-                reportDir: 'reports',
-                reportFiles: 'pytest-report.html',
-                reportName: 'Pytest HTML Report',
-                keepAll: true,
-                alwaysLinkToLastBuild: true
-            ])
-        }
+    always {
+        publishHTML([
+            allowMissing: false,
+            reportDir: 'reports',
+            reportFiles: 'pytest-report.html',
+            reportName: 'Pytest HTML Report',
+            keepAll: true,
+            alwaysLinkToLastBuild: true
+        ])
     }
+}
 }
