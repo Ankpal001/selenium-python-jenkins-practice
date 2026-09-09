@@ -25,14 +25,26 @@ pipeline {
             parallel {
 
                 stage('Login Tests') {
+                    options {
+                        timeout(time: 5, unit: 'MINUTES')
+                    }
+
                     steps {
-                        bat 'pytest tests/test_login.py'
+                        retry(2) {
+                            bat 'pytest tests/test_login.py --html=reports/login-report.html --self-contained-html'
+                        }
                     }
                 }
 
                 stage('Negative Tests') {
+                    options {
+                        timeout(time: 5, unit: 'MINUTES')
+                    }
+
                     steps {
-                        bat 'pytest tests/test_negative_login.py'
+                        retry(2) {
+                            bat 'pytest tests/test_negative_login.py --html=reports/negative-report.html --self-contained-html'
+                        }
                     }
                 }
             }
@@ -44,8 +56,17 @@ pipeline {
             publishHTML([
                 allowMissing: false,
                 reportDir: 'reports',
-                reportFiles: 'pytest-report.html',
-                reportName: 'Pytest HTML Report',
+                reportFiles: 'login-report.html',
+                reportName: 'Login Test Report',
+                keepAll: true,
+                alwaysLinkToLastBuild: true
+            ])
+
+            publishHTML([
+                allowMissing: false,
+                reportDir: 'reports',
+                reportFiles: 'negative-report.html',
+                reportName: 'Negative Test Report',
                 keepAll: true,
                 alwaysLinkToLastBuild: true
             ])
