@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         APPLICATION = 'selenium-python'
+        APP_CREDENTIALS = credentials('app-login')
     }
 
     parameters {
