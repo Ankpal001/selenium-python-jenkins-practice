@@ -3,7 +3,6 @@ pipeline {
 
     environment {
         APPLICATION = 'selenium-python'
-        APP_CREDENTIALS = credentials('app-login')
     }
 
     parameters {
@@ -26,6 +25,10 @@ pipeline {
             parallel {
 
                 stage('Login Tests') {
+                    agent {
+                        label 'windows-selenium'
+                    }
+
                     options {
                         timeout(time: 5, unit: 'MINUTES')
                     }
@@ -38,6 +41,10 @@ pipeline {
                 }
 
                 stage('Negative Tests') {
+                    agent {
+                        label 'windows-selenium'
+                    }
+
                     options {
                         timeout(time: 5, unit: 'MINUTES')
                     }
@@ -54,6 +61,7 @@ pipeline {
 
     post {
         always {
+
             publishHTML([
                 allowMissing: false,
                 reportDir: 'reports',
